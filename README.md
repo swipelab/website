@@ -1,2 +1,2 @@
-# SwipeLab Web Site
+# SwipeLab
 https://swipelab.io/
