@@ -1,2 +1,2 @@
 # SwipeLab
-https://swipelab.io/
+https://swipelab.co/
