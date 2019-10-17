@@ -1,2 +1,2 @@
-# SwipeLab
+# SWIPELAB
 https://swipelab.co/
