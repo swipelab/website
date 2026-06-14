@@ -12,3 +12,198 @@
 				-webkit-transform: rotate(359deg);
 		}
 }
+
+/* ---------------------------------------------------------------------------
+   sx ecosystem — code blocks, project cards, badges
+   --------------------------------------------------------------------------- */
+
+/* Code samples */
+.sx-code {
+  background: #1a1919;
+  color: #e6e5e5;
+  border-radius: 6px;
+  border: 1px solid #2b2a2a;
+  padding: 24px 26px;
+  margin: 0 0 30px;
+  overflow-x: auto;
+  /* override Bootstrap's pre { white-space: pre-wrap; word-break: break-all }
+     so code lines scroll instead of wrapping mid-token */
+  white-space: pre;
+  word-break: normal;
+  word-wrap: normal;
+  font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  line-height: 1.65;
+  text-align: left;
+  -webkit-font-smoothing: auto;
+}
+.sx-code code { background: none; padding: 0; color: inherit; font-size: inherit; }
+.sx-code .c { color: #7e8890; }                 /* comment */
+.sx-code .k { color: #ff7676; }                 /* keyword / accent */
+.sx-code .s { color: #9ad29a; }                 /* string */
+.sx-code .t { color: #f4b8b8; }                 /* type */
+
+code.inline-code {
+  background: #f2f2f2;
+  color: #ff5d5d;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+/* The "What we build" section has no theme rule of its own — give it the same
+   vertical rhythm as .probootstrap-section so its CTA doesn't touch the next section. */
+.service-section {
+  padding: 7em 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Robust grid: flex wrapping instead of float + breakpoint clearfix hacks.
+   Columns keep their Bootstrap width (col-md-4 etc.); flex-wrap breaks rows by
+   width alone, so cards never catch on a taller neighbour at any screen size. */
+.flex-grid {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.flex-grid > [class*="col-"] {
+  margin-bottom: 30px;
+}
+/* boxed cards (e.g. "What we build") fill the stretched column for equal height.
+   scoped to .probootstrap-box so the plain h3+p feature grids are untouched. */
+.flex-grid .probootstrap-box {
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+/* pin the trailing tag list to the bottom so it aligns across cards */
+.flex-grid .probootstrap-box ul {
+  margin-top: auto;
+}
+
+/* Project blocks */
+.project-row {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.project-row > [class*="col-"] {
+  display: -webkit-flex;
+  display: flex;
+  margin-bottom: 30px;
+}
+.project-block {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #ecedee;
+  border-radius: 8px;
+  padding: 36px 34px;
+  background: #fff;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+/* pin the trailing "View source" link to the card bottom so cards align */
+.project-block > p:last-child {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 18px;
+}
+.project-block:hover {
+  box-shadow: 0 18px 40px -18px rgba(0,0,0,.18);
+  transform: translateY(-3px);
+}
+.project-head {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.project-head .project-icon {
+  font-size: 30px;
+  color: #ff7676;
+  margin: 0 14px 0 0;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  line-height: 1;
+}
+.project-head h3 { margin: 0; }
+.project-block h3 .built-with {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ff7676;
+  border: 1px solid #ffd0d0;
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.project-block ul.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 22px;
+}
+.project-block ul.feature-list li {
+  padding: 6px 0 6px 28px;
+  position: relative;
+  color: #555;
+  line-height: 25px;
+}
+.project-block ul.feature-list li i {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: 25px;
+  line-height: 25px;
+  color: #ff7676;
+  font-size: 13px;
+}
+
+/* Platform / meta badges */
+.badge-row { margin: 14px 0 0; }
+.badge-row .badge-pill {
+  display: inline-block;
+  background: #f2f2f2;
+  color: #555;
+  font-size: 12px;
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin: 0 6px 8px 0;
+}
+.badge-row .badge-pill i { color: #ff7676; margin-right: 5px; }
+
+/* Team — initials avatars (no photos) */
+.team-avatar {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: #fff0f0;
+  color: #ff7676;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.team-name { margin: 0 0 4px; }
+.team-role { color: #999; margin: 0; }
+
+/* Stat strip */
+.sx-stat { text-align: center; padding: 10px 0; }
+.sx-stat .num { font-size: 42px; font-weight: 500; color: #ff7676; line-height: 1; }
+.sx-stat .lbl { display: block; margin-top: 8px; color: #999; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sx &mdash; a systems programming language by SWIPELAB</title>
+  <meta name="description"
+    content="sx is a systems programming language with an LLVM backend, compile-time execution, generics, closures and protocols. Plus m3te and distribution — real software built with sx.">
+  <meta name="keywords"
+    content="sx, sx language, systems programming, llvm, compiler, zig, programming language, swipelab, m3te, distribution, open source">
+
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles-merged.css">
+  <link rel="stylesheet" href="css/style.min.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="icon" type="image/ico" sizes="16x16" href="fav.ico">
+  <link rel="icon" type="image/ico" sizes="32x32" href="img/fav_32x32.ico">
+
+  <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.min.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <header role="banner" class="probootstrap-header">
+    <div class="container-fluid">
+      <a href="index.html" class="probootstrap-logo">SWIPELAB<span>.</span></a>
+
+      <a href="#" class="probootstrap-burger-menu visible-xs"><i>Menu</i></a>
+      <div class="mobile-menu-overlay"></div>
+
+      <nav role="navigation" class="probootstrap-nav hidden-xs">
+        <ul class="probootstrap-main-nav">
+          <li><a href="index.html">home</a></li>
+          <li class="active"><a href="sx.html">sx</a></li>
+          <li><a href="about.html">about</a></li>
+          <li><a href="contact.html">contact</a></li>
+        </ul>
+        <div class="extra-text visible-xs">
+          <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+          <h5>Social</h5>
+          <ul class="social-buttons">
+            <li><a href="https://github.com/swipelab"><i class="icon-github"></i></a></li>
+            <li><a href="https://twitter.com/swipelabco"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://linkedin.com/company/swipelabco"><i class="icon-linkedin"></i></a></li>
+          </ul>
+          <p><small>&copy; Copyright 2026 SWIPELAB Ltd. All Rights Reserved.</small></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="probootstrap-intro" style="background-image: url(img/hero_bg_2.jpg);"
+    data-stellar-background-ratio="0.5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 probootstrap-intro-text">
+          <h1 class="probootstrap-animate">sx &mdash; a systems language we built, and ship with</h1>
+          <div class="probootstrap-subtitle probootstrap-animate">
+            <h2>A native, LLVM-backed programming language with compile-time execution, generics, closures and
+              protocols &mdash; and an ecosystem of real software written in it.</h2>
+          </div>
+          <p class="watch-intro probootstrap-animate">
+            <a href="https://git.swipelab.com/lab/sx" class="link-with-icon">View the source <i
+                class="icon-git"></i></a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <a class="probootstrap-scroll-down js-next" href="#sx-section">Scroll down <i class="icon-chevron-down"></i></a>
+  </section>
+
+  <!-- THE LANGUAGE -->
+  <section id="sx-section" class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 mb50 section-heading text-center probootstrap-animate">
+          <h2>The Language</h2>
+          <p class="lead">sx compiles to native code through LLVM. It’s designed to stay close to the machine while
+            keeping the ergonomics modern &mdash; expressive types, compile-time metaprogramming, and clean C interop.</p>
+        </div>
+      </div>
+
+      <div class="row mb50">
+        <div class="col-md-6 probootstrap-animate">
+          <pre class="sx-code"><code><span class="c">#import "modules/std.sx";</span>
+
+Point :: <span class="k">struct</span> {
+    x, y: <span class="t">i32</span>;
+    magnitude :: (self: *Point) -> <span class="t">f32</span> {
+        sqrt(self.x * self.x + self.y * self.y)
+    }
+}
+
+main :: () {
+    p := Point.{ x = <span class="k">3</span>, y = <span class="k">4</span> };
+    print(<span class="s">"point: {}, magnitude: {}\n"</span>, p, p.magnitude());
+}</code></pre>
+        </div>
+        <div class="col-md-6 probootstrap-animate">
+          <pre class="sx-code"><code><span class="c">#import "modules/std.sx";</span>
+
+<span class="c">// generics via monomorphization</span>
+max :: (a: $T, b: T) -> T {
+    <span class="k">if</span> a > b <span class="k">then</span> a <span class="k">else</span> b
+}
+
+<span class="c">// first-class closures, captured by value</span>
+make_adder :: (n: <span class="t">i64</span>) -> Closure(<span class="t">i64</span>) -> <span class="t">i64</span> {
+    <span class="k">return</span> closure((x: <span class="t">i64</span>) -> <span class="t">i64</span> => x + n);
+}
+
+main :: () {
+    add5 := make_adder(<span class="k">5</span>);
+    print(<span class="s">"{}\n"</span>, max(<span class="k">3</span>, <span class="k">9</span>));    <span class="c">// 9</span>
+    print(<span class="s">"{}\n"</span>, add5(<span class="k">100</span>));   <span class="c">// 105</span>
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="row flex-grid">
+        <div class="col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-code"></i> <span>Native via LLVM</span></h3>
+          <p>Compiles straight to optimized native binaries through LLVM, with selectable optimization levels and
+            target CPUs.</p>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-cogs"></i> <span>Compile-time execution</span></h3>
+          <p>Run code at compile time with <code class="inline-code">#run</code> and generate code with
+            <code class="inline-code">#insert</code> &mdash; metaprogramming without a separate macro language.</p>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-stack"></i> <span>Modern type system</span></h3>
+          <p>Generics by monomorphization, protocol-based polymorphism, optionals, tagged-union enums, and pattern
+            matching.</p>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-infinite"></i> <span>First-class closures</span></h3>
+          <p>Closures capture by value; bare functions auto-promote to closures when a closure type is expected.</p>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-embed"></i> <span>C interop</span></h3>
+          <p>Bind C functions with the <code class="inline-code">extern</code> linkage modifier, or import headers and
+            sources directly with <code class="inline-code">#import c</code>.</p>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-earth"></i> <span>Cross-compilation</span></h3>
+          <p>One toolchain targets macOS, Linux, Windows and WebAssembly &mdash; ARM64 and x86_64.</p>
+        </div>
+      </div>
+
+      <div class="row mt40">
+        <div class="col-md-10 col-md-offset-1 text-center probootstrap-animate">
+          <p class="badge-row">
+            <span class="badge-pill"><i class="icon-appleinc"></i> macOS ARM64 / x86_64</span>
+            <span class="badge-pill"><i class="icon-flow-tree"></i> Linux x86_64 / ARM64</span>
+            <span class="badge-pill"><i class="icon-display"></i> Windows x86_64</span>
+            <span class="badge-pill"><i class="icon-earth"></i> WebAssembly</span>
+            <span class="badge-pill"><i class="icon-code"></i> LLVM backend</span>
+            <span class="badge-pill"><i class="icon-flag"></i> MIT licensed</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NATIVE ON MOBILE (FFI) -->
+  <section class="probootstrap-section probootstrap-border-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 mb50 section-heading text-center probootstrap-animate">
+          <h2>Native on iOS &amp; Android</h2>
+          <p class="lead">Talk to the platform directly. sx has built-in intrinsics for Objective-C and JNI, so you call
+            UIKit, Foundation and the Android SDK from sx &mdash; no hand-written bridging glue.</p>
+        </div>
+      </div>
+
+      <div class="row mb50">
+        <div class="col-md-6 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-appleinc"></i> <span>iOS &mdash; Objective-C</span></h3>
+          <pre class="sx-code"><code><span class="c">// define a real Objective-C class, in sx</span>
+Counter :: <span class="k">#objc_class</span>(<span class="s">"Counter"</span>) {
+    count: <span class="t">i32</span>;
+    bump :: (self: *Self) { self.count += <span class="k">1</span>; }
+}
+
+<span class="c">// call any Cocoa / UIKit method by selector</span>
+<span class="k">#objc_call</span>(<span class="t">void</span>)(view, <span class="s">"setBackgroundColor:"</span>, color);</code></pre>
+          <p>Define Obj-C classes in sx &mdash; ivars, properties and methods, with ARC (autorelease, strong and weak)
+            &mdash; and call any Cocoa or UIKit method by selector with <code class="inline-code">#objc_call</code>.</p>
+        </div>
+        <div class="col-md-6 probootstrap-animate">
+          <h3 class="heading-with-icon"><i class="icon-android"></i> <span>Android &mdash; JNI</span></h3>
+          <pre class="sx-code"><code><span class="c">// call Java through JNI — method-ids cached, types mapped</span>
+<span class="k">#jni_env</span>(env) {
+    win := <span class="k">#jni_call</span>(*<span class="t">void</span>)(activity,
+        <span class="s">"getWindow"</span>, <span class="s">"()Landroid/view/Window;"</span>);
+
+    px := <span class="k">#jni_static_call</span>(<span class="t">i32</span>)(color,
+        <span class="s">"rgb"</span>, <span class="s">"(III)I"</span>, <span class="k">255</span>, <span class="k">0</span>, <span class="k">64</span>);
+}</code></pre>
+          <p>Reach Java through <code class="inline-code">#jni_call</code> and
+            <code class="inline-code">#jni_static_call</code> inside a <code class="inline-code">#jni_env</code> block &mdash;
+            method-ids are cached and Java primitives map to sx types for you.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center probootstrap-animate">
+          <p class="lead" style="margin-bottom:16px;">One toolchain, all the way to a shippable bundle.</p>
+          <p class="badge-row">
+            <span class="badge-pill"><i class="icon-appleinc"></i> Foundation / UIKit</span>
+            <span class="badge-pill"><i class="icon-appleinc"></i> builds .app</span>
+            <span class="badge-pill"><i class="icon-appleinc"></i> iOS Simulator &amp; device</span>
+            <span class="badge-pill"><i class="icon-android"></i> Android SDK via JNI</span>
+            <span class="badge-pill"><i class="icon-android"></i> builds .apk</span>
+            <span class="badge-pill"><i class="icon-code"></i> codesign / manifests in sx</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="probootstrap-section probootstrap-section-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 sx-stat probootstrap-animate">
+          <span class="num">MIT</span><span class="lbl">Open source</span>
+        </div>
+        <div class="col-md-3 col-sm-6 sx-stat probootstrap-animate">
+          <span class="num">800+</span><span class="lbl">Example programs</span>
+        </div>
+        <div class="col-md-3 col-sm-6 sx-stat probootstrap-animate">
+          <span class="num">4</span><span class="lbl">Target platforms</span>
+        </div>
+        <div class="col-md-3 col-sm-6 sx-stat probootstrap-animate">
+          <span class="num">3</span><span class="lbl">Projects built in sx</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT WITH SX -->
+  <section class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 mb50 section-heading text-center probootstrap-animate">
+          <h2>Built with sx</h2>
+          <p class="lead">A language is only as real as what you can ship in it. These are real projects written in sx
+            &mdash; the proving ground that keeps the compiler honest.</p>
+        </div>
+      </div>
+      <div class="row project-row">
+        <div class="col-md-4 probootstrap-animate">
+          <div class="project-block">
+            <div class="project-head">
+              <i class="icon-grid project-icon"></i>
+              <h3>m3te <span class="built-with">built in sx</span></h3>
+            </div>
+            <p>A match-3 game written entirely in sx, targeting iOS first. Logic, rendering, input and UI are all
+              authored in sx; art ships as real palettes and sprite sheets.</p>
+            <ul class="feature-list">
+              <li><i class="icon-radio-checked"></i> End-to-end sx: logic, rendering, input and UI</li>
+              <li><i class="icon-radio-checked"></i> Runs on the iOS Simulator from a single build</li>
+              <li><i class="icon-radio-checked"></i> Verified by sx logic tests + a real app launch</li>
+            </ul>
+            <p class="badge-row">
+              <span class="badge-pill"><i class="icon-appleinc"></i> iOS</span>
+              <span class="badge-pill"><i class="icon-code"></i> 100% sx</span>
+            </p>
+            <p><a href="https://git.swipelab.com/lab/m3te" class="link-with-icon">View source <i class="icon-git"></i></a></p>
+          </div>
+        </div>
+        <div class="col-md-4 probootstrap-animate">
+          <div class="project-block">
+            <div class="project-head">
+              <i class="icon-cloud-upload project-icon"></i>
+              <h3>distribution <span class="built-with">built in sx</span></h3>
+            </div>
+            <p>An app-distribution platform that isn’t limited to one store or OS &mdash; a quiet, fast release console
+              with a CI-friendly workflow for shipping artifacts across platforms.</p>
+            <ul class="feature-list">
+              <li><i class="icon-radio-checked"></i> <code class="inline-code">distd</code> API + artifact server, <code class="inline-code">dist</code> CLI</li>
+              <li><i class="icon-radio-checked"></i> Immutable releases, mutable channels, content-addressed artifacts</li>
+              <li><i class="icon-radio-checked"></i> CI-first: upload, release, promote, audit &mdash; with JSON output</li>
+            </ul>
+            <p class="badge-row">
+              <span class="badge-pill"><i class="icon-appleinc"></i> iOS / macOS</span>
+              <span class="badge-pill"><i class="icon-android"></i> Android</span>
+              <span class="badge-pill"><i class="icon-flow-tree"></i> Linux</span>
+              <span class="badge-pill"><i class="icon-display"></i> Windows</span>
+            </p>
+            <p><a href="https://git.swipelab.com/lab/distribution" class="link-with-icon">View source <i class="icon-git"></i></a></p>
+          </div>
+        </div>
+        <div class="col-md-4 probootstrap-animate">
+          <div class="project-block">
+            <div class="project-head">
+              <i class="icon-grid2 project-icon"></i>
+              <h3>game <span class="built-with">built in sx</span></h3>
+            </div>
+            <p>A chess game built with sx &mdash; rules, move generation and board play implemented in the language, end
+              to end.</p>
+            <ul class="feature-list">
+              <li><i class="icon-radio-checked"></i> Full chess rules and move generation in sx</li>
+              <li><i class="icon-radio-checked"></i> Native build via the sx toolchain</li>
+              <li><i class="icon-radio-checked"></i> Another real workout for the compiler</li>
+            </ul>
+            <p class="badge-row">
+              <span class="badge-pill"><i class="icon-code"></i> 100% sx</span>
+            </p>
+            <p><a href="https://git.swipelab.com/lab/game" class="link-with-icon">View source <i class="icon-git"></i></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET STARTED -->
+  <section class="probootstrap-section probootstrap-section-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 mb40 section-heading text-center probootstrap-animate">
+          <h2>Get started</h2>
+          <p class="lead">sx is open source under the MIT license. Build the compiler with Zig and LLVM.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 probootstrap-animate">
+          <pre class="sx-code"><code><span class="c"># build the compiler</span>
+zig build
+
+<span class="c"># compile and run</span>
+sx run file.sx
+
+<span class="c"># compile to a native binary</span>
+sx build file.sx -o app
+
+<span class="c"># cross-compile</span>
+sx build app.sx --target wasm</code></pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center probootstrap-animate">
+          <a href="https://git.swipelab.com/lab/sx" class="btn btn-ghost btn-ghost-white btn-lg"
+            role="button">Browse the sx source</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="probootstrap-section probootstrap-section-colored">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-8 col-md-offset-2 mb30 section-heading probootstrap-animate">
+          <h2>Want to build with us?</h2>
+          <p class="lead">We design languages, tools and the products that run on them. If that’s your kind of problem,
+            say hello.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center probootstrap-animate">
+          <a href="contact.html#contact" class="btn btn-ghost btn-ghost-white btn-lg" role="button">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer role="contentinfo" class="probootstrap-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="probootstrap-footer-widget">
+            <h3>Connect With Us</h3>
+            <ul class="probootstrap-footer-social">
+              <li><a href="https://github.com/swipelab"><i class="icon-github"></i></a></li>
+              <li><a href="https://twitter.com/swipelabco"><i class="icon-twitter"></i></a></li>
+              <li><a href="https://www.facebook.com/swipelabco"><i class="icon-facebook"></i></a></li>
+              <li><a href="https://linkedin.com/company/swipelabco"><i class="icon-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row mt40">
+        <div class="col-md-12 text-center">
+          <p>
+            <small>&copy; 2026 <a href="https://swipelab.com/" target="_blank">SWIPELAB</a>. All Rights Reserved.
+              <a href="#" class="js-backtotop">Back to top</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/scripts.min.js"></script>
+  <script src="js/main.min.js"></script>
+  <script src="js/custom.js"></script>
+
+</body>
+
+</html>
