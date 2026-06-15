@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/custom.css">
   <link rel="icon" type="image/ico" sizes="16x16" href="fav.ico">
   <link rel="icon" type="image/ico" sizes="32x32" href="img/fav_32x32.ico">
+  <link rel="icon" type="image/svg+xml" href="img/sx/sx-icon-color-noborder.svg">
 
   <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
@@ -34,7 +35,7 @@
       <nav role="navigation" class="probootstrap-nav hidden-xs">
         <ul class="probootstrap-main-nav">
           <li><a href="index.html">home</a></li>
-          <li class="active"><a href="sx.html">sx</a></li>
+          <li class="active"><a href="sx.html">{sx}</a></li>
           <li><a href="about.html">about</a></li>
           <li><a href="contact.html">contact</a></li>
         </ul>
@@ -58,7 +59,12 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-8 probootstrap-intro-text">
-          <h1 class="probootstrap-animate">sx &mdash; a systems language we built, and ship with</h1>
+          <div class="sx-hero-brand probootstrap-animate" aria-hidden="true">
+            <img class="sx-hero-logo" src="img/sx/sx-logo-white.svg" width="132" height="64" alt="" decoding="async">
+          </div>
+          <h1 class="probootstrap-animate sx-hero-title">
+            <span class="sr-only">sx: </span>A systems language we built, and ship with
+          </h1>
           <div class="probootstrap-subtitle probootstrap-animate">
             <h2>A native, LLVM-backed programming language with compile-time execution, generics, closures and
               protocols &mdash; and an ecosystem of real software written in it.</h2>
@@ -259,7 +265,7 @@ Counter :: <span class="k">#objc_class</span>(<span class="s">"Counter"</span>) 
           <div class="project-block">
             <div class="project-head">
               <i class="icon-grid project-icon"></i>
-              <h3>m3te <span class="built-with">built in sx</span></h3>
+              <h3>m3te</h3>
             </div>
             <p>A match-3 game written entirely in sx, targeting iOS first. Logic, rendering, input and UI are all
               authored in sx; art ships as real palettes and sprite sheets.</p>
@@ -279,7 +285,7 @@ Counter :: <span class="k">#objc_class</span>(<span class="s">"Counter"</span>) 
           <div class="project-block">
             <div class="project-head">
               <i class="icon-cloud-upload project-icon"></i>
-              <h3>distribution <span class="built-with">built in sx</span></h3>
+              <h3>distribution</h3>
             </div>
             <p>An app-distribution platform that isn’t limited to one store or OS &mdash; a quiet, fast release console
               with a CI-friendly workflow for shipping artifacts across platforms.</p>
@@ -301,7 +307,7 @@ Counter :: <span class="k">#objc_class</span>(<span class="s">"Counter"</span>) 
           <div class="project-block">
             <div class="project-head">
               <i class="icon-grid2 project-icon"></i>
-              <h3>game <span class="built-with">built in sx</span></h3>
+              <h3>game</h3>
             </div>
             <p>A chess game built with sx &mdash; rules, move generation and board play implemented in the language, end
               to end.</p>
